@@ -21,7 +21,8 @@ public class StokKaarten
 		final int rijen = 4;
 		final int columns = 13;
 		
-		//ik ga hetzelfde voor alle kaarten doen, in de array, dus we gaan een for loop maken voor de rijen
+		//ik ga hetzelfde voor alle kaarten doen, in de array, dus we gaan twee for loops maken
+		//eentje voor de rijen
 		//en eentje voor de columns
 		
 		for (int soort =0; soort < 4; soort++)
@@ -49,7 +50,7 @@ public class StokKaarten
 	//nu de kaarten schudden
 	public void schudden()
 	{
-		huidigeKaart = 0;//opnieuw eerste kaart op 0 zetten om opnieuw te delen, instance variable die naar de vgd kaart wijst
+		huidigeKaart = 0;//opnieuw eerste kaart op 0 zetten om opnieuw te delen vanaf de stapel, instance variable die naar de vgd kaart wijst
 		//voor elke willekeurige kaart wisselen met een andere kaart
 		
 		SecureRandom randomNumber = new SecureRandom();
@@ -71,6 +72,7 @@ public class StokKaarten
 	{
 		//ik moet een check uitvoeren, want voor we delen wijst ie naar de eerste kaart, daarna tweede, etc.
 		//kan enkel voor de complete stok kaarten
+		//dus de instance huidigeKaart loopt de hele tijd door
 		if (huidigeKaart < stok.length)
 			return stok [huidigeKaart++];
 		else
