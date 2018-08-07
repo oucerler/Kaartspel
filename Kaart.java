@@ -15,11 +15,13 @@ public class Kaart
 		//deze variabele is LOCAL, nu voeg ik 'this.' toe om
 		this.kaartNaam = kaart;//hier hoef ik geen 'this.' te doen omdat ze verschillende namen hebben
 		this.kaartWaarde = waarde;
+		//kijk uit voor shadowing!
 	}
 	
 	public String toString()
 	{
 		return soort + " " + kaartNaam;
+		//method overloading
 	}
 	
 	public int getKaartWaarde()
@@ -27,15 +29,15 @@ public class Kaart
 		return kaartWaarde;
 	}
 	
-	public static void main(String [] args)
-	{
-		Kaart schoppenAas = new Kaart("Schoppen", "Aas", 14);
-		Kaart hartenKoningin = new Kaart ("Harten", "Koningin", 12);
-		//nu hebben we een object, deze hebben we geinstantieerd
-		//gaan we dit 52 keer doen?
-		System.out.println(schoppenAas);
-		//nu krijg je dus Spl.Kaart@987bhfoblabla dus het vertelt me nog niks over de kaart dus zetten we boven een toString
-		System.out.println("De schoppen aas heeft een waarde van " + schoppenAas.getKaartWaarde());
-		System.out.println("De harten koningin heeft een waarde van " + hartenKoningin.getKaartWaarde());
-	}
+//	public static void main(String [] args)
+//	{
+//		Kaart schoppenAas = new Kaart("Schoppen", "Aas", 14);
+//		Kaart hartenKoningin = new Kaart ("Harten", "Koningin", 12);
+//		//nu hebben we een object, deze hebben we geinstantieerd
+//		//gaan we dit 52 keer doen?
+//		System.out.println(schoppenAas);
+//		//nu krijg je dus Spl.Kaart@987bhfoblabla dus het vertelt me nog niks over de kaart dus zetten we boven een toString
+//		System.out.println("De schoppen aas heeft een waarde van " + schoppenAas.getKaartWaarde());
+//		System.out.println("De harten koningin heeft een waarde van " + hartenKoningin.getKaartWaarde());
+//	}
 }

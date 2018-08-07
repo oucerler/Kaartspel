@@ -5,7 +5,7 @@ import java.security.SecureRandom;
 public class StokKaarten
 {
 	//we gaan een array maken
-	private Kaart[] stok;
+	private Kaart[] stok;//hier is dus een Has A relatie, onze StokKaarten 'has a' array van Kaart
 	private int huidigeKaart;	//index voor de vgd kaart die wordt gegeven
 	
 	//ok laten we eerst de constructor bouwen
@@ -41,10 +41,15 @@ public class StokKaarten
 		}//einde vd constructor
 	}
 	
-	public void laatZien()//deze method print de stok kaarten
+	public String toString()//deze method print de stok kaarten
 	{
-		for (Kaart kaart : stok)
-			System.out.println(kaart);
+		StringBuilder sb = new StringBuilder();
+		for (Kaart kaart : stok) {
+
+			sb.append(kaart.toString());
+//			System.out.println(kaart);
+		}
+		return sb.toString();
 	}
 	
 	//nu de kaarten schudden
@@ -63,29 +68,48 @@ public class StokKaarten
 			Kaart temp = stok[eerste];
 			stok[eerste] = stok[tweede];
 			stok[tweede] = temp;
-			
 		}
 	}
-	
-	//tijd over, dus laten we proberen de kaarten te verdelen
-	public Kaart verdeelKaart()
+
+
+	void delen(Speler speler1, Speler speler2)
 	{
+		for (int eerste = 0; eerste < stok.length;)
+		{
+			speler1.krijgKaart(stok[eerste++]);
+			speler2.krijgKaart(stok[eerste++]);
+		}
+
+
+		StringBuilder sb = new StringBuilder();
+		for (Kaart kaart : speler1.stok) {
+
+			sb.append(kaart.toString()+"\n" );
+//			System.out.println(kaart);
+		}
+		System.out.println("Speler1 heeft de volgende kaarten" + "\n" + sb.toString());
+
+		sb = new StringBuilder();
+		for (Kaart kaart : speler2.stok) {
+
+			sb.append(kaart.toString()+"\n" );
+//			System.out.println(kaart);
+		}
+		System.out.println("Speler2 heeft de volgende kaarten" + "\n" + sb.toString());
+
+	}
 		//ik moet een check uitvoeren, want voor we delen wijst ie naar de eerste kaart, daarna tweede, etc.
 		//kan enkel voor de complete stok kaarten
 		//dus de instance huidigeKaart loopt de hele tijd door
-		if (huidigeKaart < stok.length)
-			return stok [huidigeKaart++];
-		else
-			return null;
-	}
-	
-	public static void main(String[] args)
-		{
-			StokKaarten deStok = new StokKaarten();
-			
-			deStok.schudden();
-			System.out.println("Kaarten zijn geschud zie beneden");
-			deStok.laatZien();
-			
+//		if (huidigeKaart < stok.length)
+//			return stok [huidigeKaart++];
+//		else
+//			return null;
+
+	public Kaart geefkaart(int i) {
+		if (i < 52) {
+			return stok[i];
 		}
+		return null;
+	}
 }//einde vd class
