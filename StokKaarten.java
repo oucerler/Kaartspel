@@ -6,17 +6,16 @@ public class StokKaarten
 {
 	//we gaan een array maken
 	private Kaart[] stok;//hier is dus een Has A relatie, onze StokKaarten 'has a' array van Kaart
-	private int huidigeKaart;	//index voor de vgd kaart die wordt gegeven
+	public int vulgrens;	//index voor de vgd kaart die wordt gegeven
 	
-	//ok laten we eerst de constructor bouwen
-	public StokKaarten() //nieuwe instantiering van StokKaarten
+	public void vulStok()
 	{
 		//eerst 2 arrays maken om alles door te komen
 		String[] namen = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Boer", "Koningin", "Koning", "Aas"};
 		String[] soorten = {"Ruiten", "Harten", "Schoppen", "Klaveren"};
 		
 		stok = new Kaart[52];//dus 52 instantieringen van Kaart objecten
-		huidigeKaart = 0;
+		vulgrens = 52;
 		
 		final int rijen = 4;
 		final int columns = 13;
@@ -38,7 +37,7 @@ public class StokKaarten
 				plaatje+2);//waarde vd kaart als een int
 				//als we nu dus een instance ve kaart creeren krijgen we dr 52
 			}
-		}//einde vd constructor
+		}
 	}
 	
 	public String toString()//deze method print de stok kaarten
@@ -55,7 +54,7 @@ public class StokKaarten
 	//nu de kaarten schudden
 	public void schudden()
 	{
-		huidigeKaart = 0;//opnieuw eerste kaart op 0 zetten om opnieuw te delen vanaf de stapel, instance variable die naar de vgd kaart wijst
+		vulgrens = 0;//opnieuw eerste kaart op 0 zetten om opnieuw te delen vanaf de stapel, instance variable die naar de vgd kaart wijst
 		//voor elke willekeurige kaart wisselen met een andere kaart
 		
 		SecureRandom randomNumber = new SecureRandom();
@@ -72,32 +71,32 @@ public class StokKaarten
 	}
 
 
-	void delen(Speler speler1, Speler speler2)
-	{
-		for (int eerste = 0; eerste < stok.length;)
-		{
-			speler1.krijgKaart(stok[eerste++]);
-			speler2.krijgKaart(stok[eerste++]);
-		}
-
-
-		StringBuilder sb = new StringBuilder();
-		for (Kaart kaart : speler1.stok) {
-
-			sb.append(kaart.toString()+"\n" );
-//			System.out.println(kaart);
-		}
-		System.out.println("Speler1 heeft de volgende kaarten" + "\n" + sb.toString());
-
-		sb = new StringBuilder();
-		for (Kaart kaart : speler2.stok) {
-
-			sb.append(kaart.toString()+"\n" );
-//			System.out.println(kaart);
-		}
-		System.out.println("Speler2 heeft de volgende kaarten" + "\n" + sb.toString());
-
-	}
+//	void delen(Speler speler1, Speler speler2)
+//	{
+//		for (int eerste = 0; eerste < stok.length;)
+//		{
+//			speler1.krijgKaart(stok[eerste++]);
+//			speler2.krijgKaart(stok[eerste++]);
+//		}
+//
+//
+//		StringBuilder sb = new StringBuilder();
+//		for (Kaart kaart : speler1.stok) {
+//
+//			sb.append(kaart.toString()+"\n" );
+////			System.out.println(kaart);
+//		}
+//		System.out.println("Speler1 heeft de volgende kaarten" + "\n" + sb.toString());
+//
+//		sb = new StringBuilder();
+//		for (Kaart kaart : speler2.stok) {
+//
+//			sb.append(kaart.toString()+"\n" );
+////			System.out.println(kaart);
+//		}
+//		System.out.println("Speler2 heeft de volgende kaarten" + "\n" + sb.toString());
+//
+//	}
 		//ik moet een check uitvoeren, want voor we delen wijst ie naar de eerste kaart, daarna tweede, etc.
 		//kan enkel voor de complete stok kaarten
 		//dus de instance huidigeKaart loopt de hele tijd door
@@ -106,10 +105,21 @@ public class StokKaarten
 //		else
 //			return null;
 
-	public Kaart geefkaart(int i) {
-		if (i < 52) {
-			return stok[i];
+	public Kaart geefkaart()
+	{
+		if (vulgrens > 0)
+		{
+			vulgrens--;
+			return stok[vulgrens];
 		}
 		return null;
+	}
+	public void voegKaartToe(Kaart kaart)
+	{
+		if (vulgrens < 52)
+		{
+			stok[vulgrens] = kaart;
+			vulgrens++;
+		}
 	}
 }//einde vd class

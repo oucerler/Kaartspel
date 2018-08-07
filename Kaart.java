@@ -20,7 +20,7 @@ public class Kaart
 	
 	public String toString()
 	{
-		return soort + " " + kaartNaam;
+		return this.soort + " " + this.kaartNaam;
 		//method overloading
 	}
 	
